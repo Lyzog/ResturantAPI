@@ -27,13 +27,13 @@ public class RestaurantController {
         return rest;
     }
 
-    @RequestMapping(value = "/restaurants/{id}", method = GET)
-    public Restaurant getResturant(@PathVariable("id") String restId) {
-
-        Restaurant rest = restaurants.getRestaurant(restId);
-
-        return rest;
-    }
+//    @RequestMapping(value = "/restaurants/{id}", method = GET)
+//    public Restaurant getResturant(@PathVariable("id") String restId) {
+//
+//        Restaurant rest = restaurants.getRestaurant(restId);
+//
+//        return rest;
+//    }
 
     @RequestMapping(value = "/restaurants/{id}",method = DELETE)
     public Restaurant deleteRestaurant(@PathVariable("id") String restId){
@@ -46,19 +46,45 @@ public class RestaurantController {
 
 
     @RequestMapping(value = "/restaurants/{id}/personnel", method = GET)
-    public Personnel getPersonnel(@PathVariable("id") String persId){
+    public Personnels getPersonnels(@PathVariable("id") String restId){
 
-        Personnel pers = restaurants.getPersonnel(persId);
+        Restaurant restaurant = restaurants.getRestaurant(restId);
 
+        return restaurant.getPersonnels();
 
-        return getPersonnel(persId);
     }
 
     @RequestMapping(value = "/restaurants/{id}/personnel",method = RequestMethod.POST)
     public Personnel postPersonnel(@PathVariable("id") String persId, @RequestBody Personnel pers){
 
-        restaurants.addPers(pers);
+        Restaurant restaurant = restaurants.getRestaurant(persId);
+
+        Personnels p = restaurant.getPersonnels();
+
+        p.addPers(pers);
 
         return pers;
     }
+
+//    @RequestMapping(value = "/restaurants/{id}/personnel/{id}", method = GET)
+//    public Personnel getPersonnel(@PathVariable("id") String persId){
+//
+//        Restaurant restaurant = restaurants.getRestaurant(persId);
+//
+//        Personnels p = restaurant.getPersonnels();
+//
+//        return p.getPersonnel(persId);
+//
+//    }
+
+    @RequestMapping(value = "/restaurants/{restId}/personnel/{personId}",method = DELETE)
+    public Personnel deletePersonnel(@PathVariable("restId") String restId, @PathVariable("personId") String persId){
+
+        Restaurant restaurant = restaurants.getRestaurant(restId);
+
+        Personnels p = restaurant.getPersonnels();
+
+        return p.deletePers(persId);
+    }
+
 }

@@ -18,7 +18,7 @@ public class Personnels {
         this.personnel = personnel;
     }
 
-    public List<Personnel> getPersonnel() {
+    public List<Personnel> getPersonnels() {
         return personnel;
     }
 

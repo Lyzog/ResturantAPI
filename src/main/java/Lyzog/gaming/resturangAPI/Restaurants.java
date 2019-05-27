@@ -4,7 +4,7 @@ package Lyzog.gaming.resturangAPI;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Restaurants extends Personnels{
+public class Restaurants{
 
     private List<Restaurant> restaurant;
 
